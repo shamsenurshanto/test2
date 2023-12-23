@@ -60,14 +60,40 @@ export class EditByClickComponent implements OnInit {
 
     }
 
+    deleteemp() {
+        const convertedJson =
+
+            {
+                "id": this.dataEdit.id,
+                "firstName": this.dataEdit.id.firstName,
+                "lastName": this.dataEdit.id.lastName,
+                "email": this.dataEdit.id.email,
+            };
+        console.log(convertedJson);
+        if (this.form.valid) {
+            this.api.deleteProduct(convertedJson).subscribe({
+                next: (res) => {
+                    console.log(res);
+                    alert("success added");
+
+                },
+                error(err) {
+                    alert("did not added");
+                    console.log(err);
+                },
+            })
+
+        }
+    }
+
     updateEmp(): void {
 
         const convertedJson =
 
             {
-                "id":this.dataEdit.id,
+                "id": this.dataEdit.id,
                 "firstName": this.form.value.employees[0].firstName,
-                "lastName":  this.form.value.employees[0].lastName,
+                "lastName": this.form.value.employees[0].lastName,
                 "email": this.form.value.employees[0].email,
 
             }

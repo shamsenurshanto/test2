@@ -23,6 +23,11 @@ export class ApiService {
     return this.http.put<any>("http://localhost:8080/api/v1/updateEmp",data);
   }
 
+  deleteProduct(data:any){
+    console.log(data);
+    return this.http.post<any>("http://localhost:8080/api/v1/delete",data);
+  }
+
   getPost(){
     return this.http.get<any>("http://localhost:8080/api/v1/name");
   }

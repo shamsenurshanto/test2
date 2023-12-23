@@ -46,7 +46,7 @@ export class DialogComponent implements OnInit {
 
   addLine(): void {
     // Add new form in FormArray
-    this.employees.push(this.fb.group({firstName: ['json'], lastName: ['pison'], email: ['ab@gmail.com']}));
+    this.employees.push(this.fb.group({firstName: [''], lastName: [''], email: ['']}));
     // Update table
 
     this.dataSource = this.employees.value;
