@@ -10,9 +10,17 @@ export class ApiService {
   postProduct(data:any){
 
     console.log(data);
-   
-    
+
+
     return this.http.post<any>("http://localhost:8080/api/v1/add",data);
+  }
+
+  editProduct(data:any){
+
+    console.log(data);
+
+
+    return this.http.put<any>("http://localhost:8080/api/v1/updateEmp",data);
   }
 
   getPost(){

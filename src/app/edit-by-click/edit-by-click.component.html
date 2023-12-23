@@ -2,22 +2,14 @@
     <div class="d-flex justify-content-between">
         <button (click)="addLine()" mat-raised-button color="primary">Add line</button>
 
-        <div ngbDropdown class="dropdown">
-            <button ngbDropdownToggle class="btn btn-secondary" type="button" id="dropdownMenuButton1"
-                    aria-expanded="false">
-                Select the department
-            </button>
-            <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
-                <li *ngFor="let option of dropdownOptions">
-                    <a ngbDropdownItem href="javascript:void(0);" (click)="selectOption(option)">
-                        {{ option }}
-                    </a>
-                </li>
-            </ul>
-        </div>
+
     </div>
 
-    <button (click)=" addProduct()" mat-raised-button color="primary">Add data</button>
+    <div>
+        <button (click)=" updateEmp()" mat-raised-button color="primary">Save Data</button>
+    </div>
+
+
 </div>
 
 

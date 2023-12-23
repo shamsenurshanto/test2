@@ -1,22 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MatTableDataSource} from "@angular/material/table";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
-import {MatTableDataSource} from '@angular/material/table';
-import {BehaviorSubject} from "rxjs";
 import {ApiService} from "../services/api.service";
-
-export interface Element {
-    name: string;
-    age: number;
-}
+import {ShareDataService} from "../Shared/share-data.service";
 
 @Component({
-    selector: 'app-dept-employee-list',
-    templateUrl: './dept-employee-list.component.html',
-    styleUrl: './dept-employee-list.component.css'
+    selector: 'app-edit-by-click',
+    templateUrl: './edit-by-click.component.html',
+    styleUrl: './edit-by-click.component.css'
 })
-
-
-export class DeptEmployeeListComponent {
+export class EditByClickComponent implements OnInit {
 
 
     displayedColumns: string[] = ['firstName', 'lastName', "email"];
@@ -32,8 +25,9 @@ export class DeptEmployeeListComponent {
     // dataSource!: MatTableDataSource<any>;
     dataSourceBackedup!: MatTableDataSource<any>;
     dataSourceBackedupNone!: MatTableDataSource<any>;
+    dataEdit: any;
 
-    constructor(private fb: FormBuilder, private api: ApiService) {
+    constructor(private fb: FormBuilder, private api: ApiService, private ServiceShare: ShareDataService) {
     }
 
     ngOnInit() {
@@ -41,16 +35,21 @@ export class DeptEmployeeListComponent {
         this.form = this.fb.group({
             employees: this.fb.array([])
         });
-
+        this.dataEdit = this.ServiceShare.getMessage();
         // Casting AbstractControl as FormArray
         this.employees = this.form.get('employees') as FormArray;
 
+        console.log(this.ServiceShare.getMessage());
+
         // Add first line
         this.addLine();
+
+
     }
+
     addLine(): void {
         // Add new form in FormArray
-        this.employees.push(this.fb.group({firstName: ['json'], lastName: ['pison'], email: ['ab@gmail.com']}));
+        this.employees.push(this.fb.group({firstName: this.dataEdit.firstName, lastName: this.dataEdit.lastName, email: this.dataEdit.email}));
         // Update table
 
         this.dataSource = this.employees.value;
@@ -61,22 +60,22 @@ export class DeptEmployeeListComponent {
 
     }
 
-    addProduct(): void {
+    updateEmp(): void {
 
         const convertedJson =
 
             {
-
-                "deptCode": this.selectedOptionValue,
-                "deptName": this.selectedOption,
-                "employees": this.form.value.employees
+                "id":this.dataEdit.id,
+                "firstName": this.form.value.employees[0].firstName,
+                "lastName":  this.form.value.employees[0].lastName,
+                "email": this.form.value.employees[0].email,
 
             }
 
         ;
         console.log(convertedJson);
         if (this.form.valid) {
-            this.api.postProduct(convertedJson).subscribe({
+            this.api.editProduct(convertedJson).subscribe({
                 next: (res) => {
                     console.log(res);
                     alert("success added");
@@ -127,8 +126,5 @@ export class DeptEmployeeListComponent {
         // this.dataSource.data = currentData;
         // console.log(this.dataSource.data);
     }
-
-
-
 
 }

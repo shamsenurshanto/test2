@@ -20,6 +20,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {DeptEmployeeListComponent} from "./dept-employee-list/dept-employee-list.component";
+import { EditByClickComponent } from './edit-by-click/edit-by-click.component';
 
 
 
@@ -31,7 +32,8 @@ import {DeptEmployeeListComponent} from "./dept-employee-list/dept-employee-list
   declarations: [
     AppComponent,
     DialogComponent,
-    DeptEmployeeListComponent
+    DeptEmployeeListComponent,
+    EditByClickComponent
   ],
   imports: [
     BrowserModule,
